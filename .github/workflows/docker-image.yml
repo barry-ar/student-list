@@ -15,3 +15,11 @@ jobs:
 
     - name: Build the Docker image
       run: docker build . --file $GITHUB_WORKSPACE/simple_api/Dockerfile --tag barry2abdulrahim/arm:$(date +%s)
+
+    - uses: actions/checkout@v1
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      env:
+          DOCKERHUB_PASSWORD: barry2abdulrahim
+          DOCKERHUB_USERNAME: Ab620479299
