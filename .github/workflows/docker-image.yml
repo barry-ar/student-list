@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag barry2abdulrahim/arm:$(date +%s)
+      run: docker build . --file student-list/simple_api/Dockerfile --tag barry2abdulrahim/arm:$(date +%s)
