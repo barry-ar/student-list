@@ -12,5 +12,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file student-list/simple_api/Dockerfile --tag barry2abdulrahim/arm:$(date +%s)
+    - name: Get the output
+        # Echo the `uname` output parameter from the `runcmd` step
+        run: |
+          pwd
+    # - name: Build the Docker image
+    #   run: docker build . --file student-list/simple_api/Dockerfile --tag barry2abdulrahim/arm:$(date +%s)
