@@ -7,10 +7,16 @@ on:
 jobs:
 
   build_arm_job:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2.1.0
+    - uses: uraimo/run-on-arch-action@v2
+      name: Run commands
+        id: runcmd
+        with:
+          arch: armv7
+          distro: ubuntu18.04
 
     - name: Login to Docker Hub
       env:
@@ -23,3 +29,8 @@ jobs:
 
     - name: Docker Push
       run: docker push barry2abdulrahim/arm:latest
+    
+    - name: Get the output
+        # Echo the `uname` output parameter from the `runcmd` step
+        run: |
+          echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
