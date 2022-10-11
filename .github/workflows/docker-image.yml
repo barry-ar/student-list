@@ -18,9 +18,8 @@ jobs:
           # a GitHub package registry.
 
           # Set an output parameter `uname` for use in subsequent steps
-          run: |
-            uname -a
-            echo ::set-output name=uname::$(uname -a)
+          run: uname -a
+          run: echo ::set-output name=uname::$(uname -a)
 
         # Echo the `uname` output parameter from the `runcmd` step
         run: |
