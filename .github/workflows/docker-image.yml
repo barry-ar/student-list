@@ -1,36 +1,40 @@
-on: [push, pull_request]
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  IMAGE_NAME: barry2abdulrahim/arm-arch
+  IMAGE_TAG: latest
 
 jobs:
-  armv7_job:
-    # The host should always be Linux
-    runs-on: ubuntu-18.04
-    name: Build on ubuntu-18.04 armv7
+
+  build_arm_job:
+    name: Build and push multi-arch image
+    runs-on: ubuntu-20.04
+
     steps:
-      - uses: actions/checkout@v2.1.0
-      - uses: uraimo/run-on-arch-action@v2
-        name: Run commands
-        id: runcmd
-        with:
-          arch: armv7
-          distro: ubuntu18.04
+    - uses: actions/checkout@v2
 
-          # Not required, but speeds up builds by storing container images in
-          # a GitHub package registry.
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
 
-          # Set an output parameter `uname` for use in subsequent steps
-          run: uname -a
-          run: echo ::set-output name=uname::$(uname -a)
 
-        # Echo the `uname` output parameter from the `runcmd` step
-        run: |
-          echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
+    - name: Build image 
+      id: build-image
+      uses: redhat-actions/buildah-build@v2
+      with:
+        image: ${{ env.IMAGE_NAME }}
+        tags: ${{ env.IMAGE_TAG }}
+        archs: amd64, ppc64le, s390x, arm64
+        dockerfiles: |
+          $GITHUB_WORKSPACE/simple_api/Dockerfile
 
-  
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - name: Login to Docker Hub
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-        run: docker build . --file $GITHUB_WORKSPACE/simple_api/Dockerfile --tag barry2abdulrahim/arm:v0.0.1
-
-        run: docker push barry2abdulrahim/arm:v0.0.1
+    - name: Docker Push
+      run: docker push barry2abdulrahim/arm-arch:latest
