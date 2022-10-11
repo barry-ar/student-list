@@ -15,7 +15,7 @@ jobs:
     - name: Get the output
       run: pwd
     - name: ls
-      run: ls /home/runner/work/student-list/student-list
+      run: echo $HOME #ls /home/runner/work/student-list/student-list
 
     # - name: Build the Docker image
     #   run: docker build . --file student-list/simple_api/Dockerfile --tag barry2abdulrahim/arm:$(date +%s)
