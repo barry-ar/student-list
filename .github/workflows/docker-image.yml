@@ -27,8 +27,6 @@ jobs:
         run: |
           echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
 
-
-      - uses: actions/checkout@v3
   
       - name: Login to Docker Hub
         env:
@@ -37,7 +35,7 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: Build the Docker image
-        run: docker build . --file $GITHUB_WORKSPACE/simple_api/Dockerfile --tag barry2abdulrahim/arm:lateste
+        run: docker build . --file $GITHUB_WORKSPACE/simple_api/Dockerfile --tag barry2abdulrahim/arm:v0.0.0
 
       - name: Docker Push
-        run: docker push barry2abdulrahim/arm:lateste
+        run: docker push barry2abdulrahim/arm:v0.0.0
