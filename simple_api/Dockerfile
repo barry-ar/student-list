@@ -4,7 +4,7 @@ RUN apt-get update -y && apt-get install python-dev python3-dev libsasl2-dev pyt
 RUN pip3 install flask flask_httpauth flask_simpleldap python-dotenv
 #COPY ./student_age.py /
 RUN ls
-RUN ls /home/runner/work/student-list/student-list/simple_api/
+RUN ls /home/runner/work/student-list/student-list/
 COPY /home/runner/work/student-list/student-list/simple_api/student_age.py /
 VOLUME ["/data"]
 COPY /home/runner/work/student-list/student-list/simple_api/student_age.json /data/student_age.json
