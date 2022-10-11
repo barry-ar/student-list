@@ -37,7 +37,7 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: Build the Docker image
-        run: docker build . --file $GITHUB_WORKSPACE/simple_api/Dockerfile --tag barry2abdulrahim/arm:latest
+        run: docker build . --file $GITHUB_WORKSPACE/simple_api/Dockerfile --tag barry2abdulrahim/arm:lateste
 
       - name: Docker Push
-        run: docker push barry2abdulrahim/arm:latest
+        run: docker push barry2abdulrahim/arm:lateste
