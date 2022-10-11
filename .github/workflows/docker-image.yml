@@ -31,7 +31,7 @@ jobs:
         tags: ${{ env.IMAGE_TAG }}
         archs: amd64, ppc64le, s390x, arm64
         dockerfiles: |
-          $GITHUB_WORKSPACE/simple_api/Dockerfile
+          ./simple_api/Dockerfile
 
     - name: Login to Docker Hub
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
