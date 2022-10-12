@@ -29,7 +29,7 @@ jobs:
       with:
         image: ${{ env.IMAGE_NAME }}
         tags: ${{ env.IMAGE_TAG }}
-        archs: arm64, amd64, aarch64
+        archs: arm64, amd64, s390x, ppc64le
         dockerfiles: |
           ./simple_api/Dockerfile
 
