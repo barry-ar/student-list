@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE_NAME: barry2abdulrahim/arm-arch
-  IMAGE_TAG: latest
+  IMAGE_TAG: v0.0.0
   IMAGE_REGISTRY: docker.io
   
 
@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v2
+    # - uses: actions/checkout@v2
 
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
+    # - name: Set up QEMU
+    #   uses: docker/setup-qemu-action@v1
 
 
     - name: Build image 
